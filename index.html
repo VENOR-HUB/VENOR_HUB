@@ -1,157 +1,217 @@
 <!DOCTYPE html>
 <html lang="sw">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VENOR HUB</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VENOR HUB</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      background: #101116;
-      color: white;
-      font-family: Arial, sans-serif;
-      padding: 22px;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 0;
-    }
-
-    .logo {
-      font-size: 25px;
-      font-weight: bold;
-      letter-spacing: 2px;
-    }
-
-    .ai {
-      color: #f0c44e;
-      font-size: 14px;
-    }
-
-    .hero {
-      margin-top: 55px;
-      text-align: center;
-    }
-
-    .hero h1 {
-      font-size: 36px;
-      margin-bottom: 15px;
-    }
-
-    .hero span {
-      color: #f0c44e;
-    }
-
-    .hero p {
-      color: #b5b4bd;
-      line-height: 1.6;
-    }
-
-    .search {
-      margin: 28px 0;
-    }
-
-    .search input {
-      width: 100%;
-      padding: 17px;
-      border-radius: 12px;
-      border: 1px solid #393741;
-      background: #222127;
-      color: white;
-      font-size: 16px;
-    }
-
-    .categories {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-top: 25px;
-    }
-
-    .category {
-      background: #222127;
-      border: 1px solid #393741;
-      border-radius: 14px;
-      padding: 22px 12px;
-      text-align: center;
-    }
-
-    .category h3 {
-      margin-bottom: 8px;
-    }
-
-    .category p {
-      color: #aaa8b2;
-      font-size: 13px;
-    }
-
-    .footer {
-      text-align: center;
-      color: #888691;
-      margin-top: 50px;
-      font-size: 13px;
-    }
-  </style>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:#09090d;color:#fff;
+  font-family:Arial,sans-serif;padding:20px;
+}
+header{
+  display:flex;justify-content:space-between;
+  align-items:center;margin-bottom:45px;
+}
+.logo{font-size:27px;font-weight:bold;letter-spacing:2px}
+.ai{color:#d6ad35;font-size:14px}
+.hero{text-align:center;margin-bottom:25px}
+.hero h1{font-size:35px;margin-bottom:15px}
+.hero h1 span{color:#c49a25}
+.hero p{color:#aaa;font-size:16px;line-height:1.6}
+.search{margin:25px 0 15px}
+.search input{
+  width:100%;padding:18px;
+  background:#1a191f;color:#fff;
+  border:1px solid #393740;border-radius:13px;
+  font-size:16px;outline:none;
+}
+.search input:focus{border-color:#c49a25}
+.filters{display:flex;gap:10px;margin-bottom:20px}
+.filters select{
+  flex:1;padding:12px;
+  background:#1a191f;color:#fff;
+  border:1px solid #393740;border-radius:10px;
+}
+.results-title{margin:22px 0 15px;font-size:18px}
+.products{display:grid;grid-template-columns:1fr;gap:14px}
+.card{
+  background:#17161c;border:1px solid #34323b;
+  border-radius:14px;padding:17px;
+}
+.card h3{margin-bottom:10px;font-size:18px}
+.price{color:#d7b344;font-weight:bold;font-size:20px;margin-bottom:12px}
+.details{color:#aaa;font-size:14px;line-height:1.8}
+.tag{
+  display:inline-block;margin-top:10px;
+  border:1px solid #47434d;border-radius:20px;
+  padding:5px 10px;font-size:12px;color:#ddd;
+}
+.empty{
+  padding:30px;text-align:center;
+  color:#aaa;background:#17161c;border-radius:12px;
+}
+footer{text-align:center;color:#777;margin:40px 0 20px;font-size:13px}
+</style>
 </head>
 
 <body>
 
-  <header>
-    <div class="logo">VENOR</div>
-    <div class="ai">✦ Venor AI</div>
-  </header>
+<header>
+  <div class="logo">VENOR</div>
+  <div class="ai">✦ Venor AI</div>
+</header>
 
-  <section class="hero">
-    <h1>Discover <span>Anything.</span></h1>
-    <p>
-      Tafuta bidhaa, huduma na biashara
-      kwa urahisi kupitia Venor Hub.
-    </p>
-  </section>
+<section class="hero">
+  <h1>Discover <span>Anything.</span></h1>
+  <p>Tafuta bidhaa, huduma na biashara<br>
+  kwa urahisi kupitia Venor Hub.</p>
+</section>
 
-  <div class="search">
-    <input
-      type="search"
-      placeholder="Unatafuta nini leo?"
-    >
-  </div>
+<div class="search">
+  <input id="searchInput" type="search"
+  placeholder="Unatafuta nini leo?">
+</div>
 
-  <section class="categories">
+<div class="filters">
+  <select id="categoryFilter">
+    <option value="all">Categories zote</option>
+    <option value="Phones">Phones</option>
+    <option value="Electronics">Electronics</option>
+    <option value="Services">Services</option>
+  </select>
 
-    <div class="category">
-      <h3>Marketplace</h3>
-      <p>Nunua na uza</p>
+  <select id="sortFilter">
+    <option value="default">Sort: Default</option>
+    <option value="low">Bei: Ndogo → Kubwa</option>
+    <option value="high">Bei: Kubwa → Ndogo</option>
+  </select>
+</div>
+
+<h2 class="results-title" id="resultsTitle">
+  Bidhaa za mfano
+</h2>
+
+<div class="products" id="products"></div>
+
+<footer>VENOR HUB · Digital Discovery Platform</footer>
+
+<script>
+const items = [
+  {
+    name:"iPhone 15 128GB",
+    category:"Phones",
+    price:850000,
+    seller:"Example Store",
+    location:"Dar es Salaam",
+    description:"iPhone 15, 128GB, used, condition nzuri."
+  },
+  {
+    name:"iPhone 15 256GB",
+    category:"Phones",
+    price:980000,
+    seller:"Demo Mobile",
+    location:"Mbeya",
+    description:"iPhone 15 storage 256GB."
+  },
+  {
+    name:"Samsung Galaxy A15",
+    category:"Phones",
+    price:420000,
+    seller:"Sample Phones",
+    location:"Dodoma",
+    description:"Samsung smartphone, 128GB."
+  },
+  {
+    name:"Laptop HP Core i5",
+    category:"Electronics",
+    price:750000,
+    seller:"Demo Computers",
+    location:"Dar es Salaam",
+    description:"Laptop kwa masomo na kazi."
+  },
+  {
+    name:"TV Smart 43 inch",
+    category:"Electronics",
+    price:680000,
+    seller:"Example Electronics",
+    location:"Arusha",
+    description:"Smart television ya nyumbani."
+  },
+  {
+    name:"Car Wash",
+    category:"Services",
+    price:15000,
+    seller:"Demo Car Wash",
+    location:"Mbeya",
+    description:"Huduma ya kuosha magari."
+  }
+];
+
+const searchInput = document.getElementById("searchInput");
+const categoryFilter = document.getElementById("categoryFilter");
+const sortFilter = document.getElementById("sortFilter");
+const products = document.getElementById("products");
+const resultsTitle = document.getElementById("resultsTitle");
+
+function render(){
+  const query = searchInput.value.toLowerCase().trim();
+  const category = categoryFilter.value;
+
+  let filtered = items.filter(item=>{
+    const text = (
+      item.name+" "+item.category+" "+
+      item.seller+" "+item.location+" "+
+      item.description
+    ).toLowerCase();
+
+    const matchesSearch = text.includes(query);
+    const matchesCategory =
+      category==="all" || item.category===category;
+
+    return matchesSearch && matchesCategory;
+  });
+
+  if(sortFilter.value==="low"){
+    filtered.sort((a,b)=>a.price-b.price);
+  }
+
+  if(sortFilter.value==="high"){
+    filtered.sort((a,b)=>b.price-a.price);
+  }
+
+  resultsTitle.textContent =
+    query ? `Matokeo: ${filtered.length}` :
+    `Bidhaa za mfano: ${filtered.length}`;
+
+  if(filtered.length===0){
+    products.innerHTML=
+      '<div class="empty">Hakuna matokeo. Jaribu kutafuta kitu kingine.</div>';
+    return;
+  }
+
+  products.innerHTML=filtered.map(item=>`
+    <div class="card">
+      <h3>${item.name}</h3>
+      <div class="price">TSh ${item.price.toLocaleString()}</div>
+      <div class="details">
+        Seller: ${item.seller}<br>
+        Location: ${item.location}<br>
+        ${item.description}
+      </div>
+      <span class="tag">${item.category}</span>
     </div>
+  `).join("");
+}
 
-    <div class="category">
-      <h3>Products</h3>
-      <p>Gundua bidhaa</p>
-    </div>
+searchInput.addEventListener("input",render);
+categoryFilter.addEventListener("change",render);
+sortFilter.addEventListener("change",render);
 
-    <div class="category">
-      <h3>Images</h3>
-      <p>Tafuta picha</p>
-    </div>
-
-    <div class="category">
-      <h3>Videos</h3>
-      <p>Gundua video</p>
-    </div>
-
-  </section>
-
-  <div class="footer">
-    VENOR HUB · Digital Discovery Platform
-  </div>
+render();
+</script>
 
 </body>
 </html>
