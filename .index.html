@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="sw">
 <head>
@@ -6,212 +7,829 @@
 <title>VENOR HUB</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{
-  background:#09090d;color:#fff;
-  font-family:Arial,sans-serif;padding:20px;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
-header{
-  display:flex;justify-content:space-between;
-  align-items:center;margin-bottom:45px;
+
+:root {
+  --bg: #06101f;
+  --card: #0c1c33;
+  --card2: #102744;
+  --blue: #168cff;
+  --cyan: #19d5ff;
+  --purple: #a33cff;
+  --text: #ffffff;
+  --muted: #a6b7ce;
+  --border: rgba(255,255,255,.09);
 }
-.logo{font-size:27px;font-weight:bold;letter-spacing:2px}
-.ai{color:#d6ad35;font-size:14px}
-.hero{text-align:center;margin-bottom:25px}
-.hero h1{font-size:35px;margin-bottom:15px}
-.hero h1 span{color:#c49a25}
-.hero p{color:#aaa;font-size:16px;line-height:1.6}
-.search{margin:25px 0 15px}
-.search input{
-  width:100%;padding:18px;
-  background:#1a191f;color:#fff;
-  border:1px solid #393740;border-radius:13px;
-  font-size:16px;outline:none;
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  padding-bottom: 90px;
 }
-.search input:focus{border-color:#c49a25}
-.filters{display:flex;gap:10px;margin-bottom:20px}
-.filters select{
-  flex:1;padding:12px;
-  background:#1a191f;color:#fff;
-  border:1px solid #393740;border-radius:10px;
+
+button, input {
+  font: inherit;
 }
-.results-title{margin:22px 0 15px;font-size:18px}
-.products{display:grid;grid-template-columns:1fr;gap:14px}
-.card{
-  background:#17161c;border:1px solid #34323b;
-  border-radius:14px;padding:17px;
+
+button {
+  cursor: pointer;
+  color: inherit;
+  border: none;
 }
-.card h3{margin-bottom:10px;font-size:18px}
-.price{color:#d7b344;font-weight:bold;font-size:20px;margin-bottom:12px}
-.details{color:#aaa;font-size:14px;line-height:1.8}
-.tag{
-  display:inline-block;margin-top:10px;
-  border:1px solid #47434d;border-radius:20px;
-  padding:5px 10px;font-size:12px;color:#ddd;
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 17px 16px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(6,16,31,.96);
+  border-bottom: 1px solid var(--border);
 }
-.empty{
-  padding:30px;text-align:center;
-  color:#aaa;background:#17161c;border-radius:12px;
+
+.brand {
+  font-size: 25px;
+  font-weight: 900;
+  letter-spacing: 2px;
 }
-footer{text-align:center;color:#777;margin:40px 0 20px;font-size:13px}
+
+.brand span {
+  background: linear-gradient(90deg,#168cff,#a33cff);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.top-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.icon-btn {
+  background: var(--card2);
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  font-size: 18px;
+}
+
+.plus {
+  background: linear-gradient(90deg,#a33cff,#168cff);
+  border-radius: 20px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.container {
+  max-width: 1050px;
+  margin: auto;
+  padding: 15px;
+}
+
+.hero {
+  padding: 23px 18px;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 90% 10%,rgba(110,40,255,.30),transparent 35%),
+    linear-gradient(135deg,#0b2443,#071323);
+  border: 1px solid var(--border);
+  margin-bottom: 18px;
+}
+
+.hero-label {
+  color: var(--cyan);
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.hero h1 {
+  font-size: 27px;
+  line-height: 1.25;
+  margin-bottom: 10px;
+}
+
+.hero h1 span {
+  color: var(--cyan);
+}
+
+.hero p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.searchbox {
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  padding: 5px;
+  border-radius: 15px;
+  gap: 5px;
+}
+
+.searchbox input {
+  width: 100%;
+  min-width: 0;
+  border: none;
+  outline: none;
+  padding: 13px 8px;
+  color: #172438;
+  background: transparent;
+  font-size: 14px;
+}
+
+.searchbox button {
+  background: linear-gradient(100deg,#168cff,#8b35ff);
+  border-radius: 12px;
+  padding: 13px;
+  font-weight: bold;
+}
+
+.ai-button {
+  margin-top: 12px;
+  width: 100%;
+  padding: 13px;
+  border-radius: 13px;
+  background: linear-gradient(100deg,#7435ff,#168cff,#12cfff);
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 23px 0 13px;
+}
+
+.section-head h2 {
+  font-size: 18px;
+}
+
+.see-all {
+  color: var(--cyan);
+  font-size: 13px;
+  background: transparent;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 9px;
+}
+
+.category {
+  text-align: center;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 14px 5px;
+  transition: .2s;
+}
+
+.category:active {
+  transform: scale(.96);
+}
+
+.category .emoji {
+  font-size: 23px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.category strong {
+  display: block;
+  font-size: 11px;
+}
+
+.category small {
+  display: block;
+  color: var(--muted);
+  font-size: 9px;
+  margin-top: 5px;
+}
+
+.ai-card {
+  background: linear-gradient(110deg,#172d67,#5b24a5,#087fbd);
+  border-radius: 17px;
+  padding: 17px;
+  margin-top: 20px;
+  border: 1px solid rgba(255,255,255,.1);
+}
+
+.ai-card h3 {
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+
+.ai-card p {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #e1eaff;
+}
+
+.ai-card button {
+  background: #fff;
+  color: #17213a;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 10px;
+  margin-top: 12px;
+  font-size: 12px;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+.filter {
+  white-space: nowrap;
+  padding: 9px 14px;
+  border-radius: 22px;
+  background: var(--card2);
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.filter.active {
+  background: var(--blue);
+  color: #fff;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 12px;
+}
+
+.product {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.product img {
+  width: 100%;
+  height: 145px;
+  object-fit: cover;
+  background: #172a43;
+}
+
+.product-info {
+  padding: 11px;
+}
+
+.product h3 {
+  font-size: 13px;
+  line-height: 1.4;
+  margin-bottom: 7px;
+}
+
+.price {
+  color: var(--cyan);
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.location {
+  color: var(--muted);
+  font-size: 10px;
+  margin-top: 7px;
+}
+
+.rating {
+  font-size: 11px;
+  margin-top: 8px;
+  color: #ffce55;
+}
+
+.product button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 9px;
+  background: linear-gradient(100deg,#168cff,#783bff);
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.service-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 15px;
+  border-radius: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.service-emoji {
+  font-size: 27px;
+}
+
+.service-card h3 {
+  font-size: 14px;
+}
+
+.service-card p {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 5px;
+}
+
+.promo {
+  margin-top: 20px;
+  padding: 19px;
+  border-radius: 18px;
+  background: linear-gradient(110deg,#073c68,#5e27b5);
+}
+
+.promo h2 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.promo p {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #d9e8ff;
+}
+
+.promo button {
+  margin-top: 12px;
+  padding: 11px 15px;
+  background: white;
+  color: #15325a;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #081426;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-around;
+  padding: 11px 4px 8px;
+  z-index: 50;
+}
+
+.nav-item {
+  background: transparent;
+  color: #8296b1;
+  text-align: center;
+  font-size: 10px;
+  min-width: 55px;
+}
+
+.nav-item .nav-icon {
+  display: block;
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.nav-item.active {
+  color: var(--cyan);
+}
+
+.empty {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 25px;
+  color: var(--muted);
+}
+
+footer {
+  text-align: center;
+  padding: 30px 15px;
+  font-size: 11px;
+  color: #74859e;
+}
+
+@media (min-width:700px) {
+  .container {
+    padding: 25px;
+  }
+
+  .hero {
+    padding: 40px;
+  }
+
+  .hero h1 {
+    font-size: 40px;
+  }
+
+  .category-grid {
+    grid-template-columns: repeat(8,1fr);
+  }
+
+  .products {
+    grid-template-columns: repeat(4,minmax(0,1fr));
+  }
+
+  .product img {
+    height: 190px;
+  }
+
+  .bottom-nav {
+    max-width: 700px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 18px 18px 0 0;
+  }
+}
 </style>
 </head>
 
 <body>
 
-<header>
-  <div class="logo">VENOR</div>
-  <div class="ai">✦ Venor AI</div>
+<header class="topbar">
+  <div class="brand">VENOR<span> HUB</span></div>
+
+  <div class="top-actions">
+    <button class="plus" onclick="showMessage('Get Plus itakuja kwenye hatua inayofuata.')">
+      ✦ GET PLUS
+    </button>
+    <button class="icon-btn" onclick="showMessage('Notifications zitaunganishwa baadaye.')">🔔</button>
+    <button class="icon-btn" onclick="showMessage('Menu ya ziada ya Venor Hub.')">☰</button>
+  </div>
 </header>
 
+<main class="container">
+
 <section class="hero">
-  <h1>Discover <span>Anything.</span></h1>
-  <p>Tafuta bidhaa, huduma na biashara<br>
-  kwa urahisi kupitia Venor Hub.</p>
+  <div class="hero-label">✦ SMART DISCOVERY PLATFORM</div>
+
+  <h1>Tafuta. Linganisha.<br><span>Pata bora zaidi.</span></h1>
+
+  <p>
+    Gundua bidhaa, huduma, biashara na fursa
+    kupitia Venor Hub.
+  </p>
+
+  <div class="searchbox">
+    <input
+      id="searchInput"
+      type="search"
+      placeholder="Unatafuta nini leo?"
+      oninput="searchProducts()"
+    >
+    <button onclick="searchProducts()">Tafuta</button>
+  </div>
+
+  <button class="ai-button" onclick="aiSearch()">
+    ✨ Tafuta kwa Venor AI
+  </button>
 </section>
 
-<div class="search">
-  <input id="searchInput" type="search"
-  placeholder="Unatafuta nini leo?">
+<div class="section-head">
+  <h2>Gundua huduma</h2>
+  <button class="see-all" onclick="showMessage('Categories zaidi zitaongezwa.')">
+    Zote →
+  </button>
+</div>
+
+<div class="category-grid">
+
+  <button class="category" onclick="chooseCategory('Marketplace')">
+    <span class="emoji">🛍️</span>
+    <strong>Marketplace</strong>
+    <small>Nunua na uza</small>
+  </button>
+
+  <button class="category" onclick="chooseCategory('Bidhaa')">
+    <span class="emoji">📦</span>
+    <strong>Bidhaa</strong>
+    <small>Gundua bidhaa</small>
+  </button>
+
+  <button class="category" onclick="chooseCategory('Huduma')">
+    <span class="emoji">🛠️</span>
+    <strong>Huduma</strong>
+    <small>Pata huduma</small>
+  </button>
+
+  <button class="category" onclick="chooseCategory('Elimu')">
+    <span class="emoji">🎓</span>
+    <strong>Elimu</strong>
+    <small>Jifunze</small>
+  </button>
+
+  <button class="category" onclick="chooseCategory('Magari')">
+    <span class="emoji">🚗</span>
+    <strong>Magari</strong>
+    <small>Nunua au uza</small>
+  </button>
+
+  <button class="category" onclick="chooseCategory('Nyumba')">
+    <span class="emoji">🏠</span>
+    <strong>Nyumba</strong>
+    <small>Makazi</small>
+  </button>
+
+  <button class="category" onclick="chooseCategory('Biashara')">
+    <span class="emoji">🏪</span>
+    <strong>Biashara</strong>
+    <small>Maduka</small>
+  </button>
+
+  <button class="category" onclick="chooseCategory('Usafiri')">
+    <span class="emoji">🚌</span>
+    <strong>Usafiri</strong>
+    <small>Safari</small>
+  </button>
+
+</div>
+
+<section class="ai-card">
+  <h3>✨ Venor AI</h3>
+  <p>
+    Tafuta kwa akili. Eleza unachohitaji kwa maneno yako
+    na Venor itakusaidia kupata chaguo bora.
+  </p>
+  <button onclick="aiSearch()">Jaribu Venor AI →</button>
+</section>
+
+<div class="section-head">
+  <h2>Bidhaa zinazopatikana</h2>
+  <button class="see-all" onclick="resetProducts()">Tazama zote →</button>
 </div>
 
 <div class="filters">
-  <select id="categoryFilter">
-    <option value="all">Categories zote</option>
-    <option value="Phones">Phones</option>
-    <option value="Electronics">Electronics</option>
-    <option value="Services">Services</option>
-  </select>
-
-  <select id="sortFilter">
-    <option value="default">Sort: Default</option>
-    <option value="low">Bei: Ndogo → Kubwa</option>
-    <option value="high">Bei: Kubwa → Ndogo</option>
-  </select>
+  <button class="filter active" onclick="filterProducts('Zote',this)">Zote</button>
+  <button class="filter" onclick="filterProducts('Simu',this)">Simu</button>
+  <button class="filter" onclick="filterProducts('Kompyuta',this)">Kompyuta</button>
+  <button class="filter" onclick="filterProducts('TV',this)">TV</button>
+  <button class="filter" onclick="filterProducts('Magari',this)">Magari</button>
 </div>
-
-<h2 class="results-title" id="resultsTitle">
-  Bidhaa za mfano
-</h2>
 
 <div class="products" id="products"></div>
 
-<footer>VENOR HUB · Digital Discovery Platform</footer>
+<div class="section-head">
+  <h2>Huduma karibu nawe</h2>
+  <button class="see-all" onclick="showMessage('Nearby discovery itaunganishwa na location na maps.')">
+    Ramani →
+  </button>
+</div>
+
+<div class="service-card" onclick="showMessage('Car wash discovery itakuja kwenye mfumo.')">
+  <div class="service-emoji">🚘</div>
+  <div>
+    <h3>Car Wash</h3>
+    <p>Tafuta sehemu za kuosha magari karibu nawe</p>
+  </div>
+</div>
+
+<div class="service-card" onclick="showMessage('Salon discovery itaunganishwa baadaye.')">
+  <div class="service-emoji">💈</div>
+  <div>
+    <h3>Salon & Barber</h3>
+    <p>Gundua saluni na barber shops</p>
+  </div>
+</div>
+
+<div class="service-card" onclick="showMessage('Fundis directory itaongezwa.')">
+  <div class="service-emoji">🔧</div>
+  <div>
+    <h3>Fundis</h3>
+    <p>Wataalamu wa huduma mbalimbali</p>
+  </div>
+</div>
+
+<section class="promo">
+  <h2>🚀 Venor Hub Plus</h2>
+  <p>
+    Fungua uwezo zaidi wa kutafuta, kulinganisha na
+    kugundua fursa kwenye Venor Hub.
+  </p>
+  <button onclick="showMessage('Get Plus bado ni prototype.')">
+    Gundua Get Plus
+  </button>
+</section>
+
+</main>
+
+<footer>
+  VENOR HUB · Search · Compare · Buy · Connect<br>
+  Tanzania Smart Discovery Platform
+</footer>
+
+<nav class="bottom-nav">
+
+  <button class="nav-item active" onclick="navClick(this,'Home')">
+    <span class="nav-icon">⌂</span>
+    Nyumbani
+  </button>
+
+  <button class="nav-item" onclick="navClick(this,'Tafuta')">
+    <span class="nav-icon">⌕</span>
+    Tafuta
+  </button>
+
+  <button class="nav-item" onclick="navClick(this,'Chat')">
+    <span class="nav-icon">💬</span>
+    Chat
+  </button>
+
+  <button class="nav-item" onclick="navClick(this,'Wasifu')">
+    <span class="nav-icon">♙</span>
+    Wasifu
+  </button>
+
+</nav>
 
 <script>
-const items = [
+
+const sampleProducts = [
   {
-    name:"iPhone 15 128GB",
-    category:"Phones",
-    price:850000,
-    seller:"Example Store",
+    name:"iPhone 15",
+    category:"Simu",
+    price:"Tsh 930,000",
     location:"Dar es Salaam",
-    description:"iPhone 15, 128GB, used, condition nzuri."
+    rating:"⭐ 4.8",
+    image:"https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=600&q=80"
   },
   {
-    name:"iPhone 15 256GB",
-    category:"Phones",
-    price:980000,
-    seller:"Demo Mobile",
+    name:"Samsung S24 Ultra",
+    category:"Simu",
+    price:"Tsh 1,250,000",
+    location:"Dar es Salaam",
+    rating:"⭐ 4.7",
+    image:"https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    name:"MacBook Air",
+    category:"Kompyuta",
+    price:"Tsh 2,350,000",
+    location:"Dar es Salaam",
+    rating:"⭐ 4.9",
+    image:"https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    name:"Smart TV 55 inch",
+    category:"TV",
+    price:"Tsh 750,000",
     location:"Mbeya",
-    description:"iPhone 15 storage 256GB."
+    rating:"⭐ 4.6",
+    image:"https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=600&q=80"
   },
   {
-    name:"Samsung Galaxy A15",
-    category:"Phones",
-    price:420000,
-    seller:"Sample Phones",
-    location:"Dodoma",
-    description:"Samsung smartphone, 128GB."
-  },
-  {
-    name:"Laptop HP Core i5",
-    category:"Electronics",
-    price:750000,
-    seller:"Demo Computers",
+    name:"Toyota Harrier",
+    category:"Magari",
+    price:"Tsh 65,000,000",
     location:"Dar es Salaam",
-    description:"Laptop kwa masomo na kazi."
+    rating:"⭐ 4.7",
+    image:"https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?auto=format&fit=crop&w=600&q=80"
   },
   {
-    name:"TV Smart 43 inch",
-    category:"Electronics",
-    price:680000,
-    seller:"Example Electronics",
+    name:"Gaming Laptop",
+    category:"Kompyuta",
+    price:"Tsh 2,800,000",
     location:"Arusha",
-    description:"Smart television ya nyumbani."
-  },
-  {
-    name:"Car Wash",
-    category:"Services",
-    price:15000,
-    seller:"Demo Car Wash",
-    location:"Mbeya",
-    description:"Huduma ya kuosha magari."
+    rating:"⭐ 4.8",
+    image:"https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=600&q=80"
   }
 ];
 
-const searchInput = document.getElementById("searchInput");
-const categoryFilter = document.getElementById("categoryFilter");
-const sortFilter = document.getElementById("sortFilter");
-const products = document.getElementById("products");
-const resultsTitle = document.getElementById("resultsTitle");
+let currentCategory = "Zote";
 
-function render(){
-  const query = searchInput.value.toLowerCase().trim();
-  const category = categoryFilter.value;
+function renderProducts(list) {
+  const area = document.getElementById("products");
 
-  let filtered = items.filter(item=>{
-    const text = (
-      item.name+" "+item.category+" "+
-      item.seller+" "+item.location+" "+
-      item.description
-    ).toLowerCase();
-
-    const matchesSearch = text.includes(query);
-    const matchesCategory =
-      category==="all" || item.category===category;
-
-    return matchesSearch && matchesCategory;
-  });
-
-  if(sortFilter.value==="low"){
-    filtered.sort((a,b)=>a.price-b.price);
-  }
-
-  if(sortFilter.value==="high"){
-    filtered.sort((a,b)=>b.price-a.price);
-  }
-
-  resultsTitle.textContent =
-    query ? `Matokeo: ${filtered.length}` :
-    `Bidhaa za mfano: ${filtered.length}`;
-
-  if(filtered.length===0){
-    products.innerHTML=
-      '<div class="empty">Hakuna matokeo. Jaribu kutafuta kitu kingine.</div>';
+  if (!list.length) {
+    area.innerHTML = `
+      <div class="empty">
+        Hakuna bidhaa iliyopatikana kwenye prototype hii.
+      </div>
+    `;
     return;
   }
 
-  products.innerHTML=filtered.map(item=>`
-    <div class="card">
-      <h3>${item.name}</h3>
-      <div class="price">TSh ${item.price.toLocaleString()}</div>
-      <div class="details">
-        Seller: ${item.seller}<br>
-        Location: ${item.location}<br>
-        ${item.description}
+  area.innerHTML = list.map(product => `
+    <div class="product">
+      <img src="${product.image}" alt="${product.name}"
+      onerror="this.style.display='none'">
+
+      <div class="product-info">
+        <h3>${product.name}</h3>
+        <div class="price">${product.price}</div>
+        <div class="location">📍 ${product.location}</div>
+        <div class="rating">${product.rating}</div>
+
+        <button onclick="showMessage('Seller profile na chat vitaunganishwa katika hatua inayofuata.')">
+          Tazama bidhaa
+        </button>
       </div>
-      <span class="tag">${item.category}</span>
     </div>
   `).join("");
 }
 
-searchInput.addEventListener("input",render);
-categoryFilter.addEventListener("change",render);
-sortFilter.addEventListener("change",render);
+function searchProducts() {
+  const query = document.getElementById("searchInput")
+    .value.toLowerCase().trim();
 
-render();
+  let list = sampleProducts;
+
+  if (currentCategory !== "Zote") {
+    list = list.filter(p => p.category === currentCategory);
+  }
+
+  if (query) {
+    list = list.filter(p =>
+      p.name.toLowerCase().includes(query) ||
+      p.category.toLowerCase().includes(query) ||
+      p.location.toLowerCase().includes(query)
+    );
+  }
+
+  renderProducts(list);
+}
+
+function filterProducts(category,button) {
+  currentCategory = category;
+
+  document.querySelectorAll(".filter").forEach(btn =>
+    btn.classList.remove("active")
+  );
+
+  button.classList.add("active");
+  searchProducts();
+}
+
+function resetProducts() {
+  currentCategory = "Zote";
+  document.getElementById("searchInput").value = "";
+
+  document.querySelectorAll(".filter").forEach(btn =>
+    btn.classList.remove("active")
+  );
+
+  document.querySelector(".filter").classList.add("active");
+  renderProducts(sampleProducts);
+}
+
+function chooseCategory(category) {
+  showMessage(category + " itaunganishwa na search na listings kwenye hatua inayofuata.");
+}
+
+function aiSearch() {
+  const query = document.getElementById("searchInput").value;
+
+  if (query) {
+    showMessage(
+      'Venor AI prototype: Umetafuta "' + query +
+      '". AI halisi itaunganishwa baadaye.'
+    );
+  } else {
+    showMessage(
+      "Venor AI itakusaidia kueleza unachohitaji na kutafuta matokeo."
+    );
+  }
+}
+
+function navClick(button,name) {
+  document.querySelectorAll(".nav-item").forEach(btn =>
+    btn.classList.remove("active")
+  );
+
+  button.classList.add("active");
+
+  if (name === "Tafuta") {
+    document.getElementById("searchInput").focus();
+    window.scrollTo({top:0,behavior:"smooth"});
+  } else {
+    showMessage(name + " page itaunganishwa kwenye hatua zinazofuata.");
+  }
+}
+
+function showMessage(message) {
+  alert(message);
+}
+
+renderProducts(sampleProducts);
+
 </script>
 
 </body>
 </html>
+
